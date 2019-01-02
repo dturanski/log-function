@@ -18,13 +18,17 @@ package functions;
 
 import java.util.function.Consumer;
 
+import io.cloudevents.impl.DefaultCloudEventImpl;
+
 /**
  * @author David Turanski
  **/
-public class LogFunction implements Consumer<String> {
+public class LogFunction implements Consumer<DefaultCloudEventImpl> {
 
 	@Override
-	public void accept(String s) {
-		System.out.println(String.format("Received: %s", s));
+	public void accept(DefaultCloudEventImpl cloudEvent) {
+
+		System.out.println(String.format("Received: %s",
+			new String((byte []) cloudEvent.getData().get())));
 	}
 }
