@@ -18,14 +18,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>scdf-knative-interoperability</artifactId>
-		<groupId>org.dturanski</groupId>
-		<version>1.0.0.BUILD-SNAPSHOT</version>
-	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>log-function</artifactId>
+  <groupId>org.dturanski</groupId>
+  <artifactId>log-function</artifactId>
+  <version>1.0.0</version>
+
+  <name>log</name>
+  <description>Sample Java demo app</description>
+  <url>https://github.com/dturanski/log-function</url>
+
+  <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
 
 
 </project>
