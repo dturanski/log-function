@@ -16,6 +16,7 @@
 
 package functions;
 
+import java.util.Base64;
 import java.util.function.Function;
 
 import io.cloudevents.impl.DefaultCloudEventImpl;
@@ -31,11 +32,10 @@ import org.springframework.context.annotation.Bean;
 public class LogApp {
 
 	@Bean
-	public Function<DefaultCloudEventImpl, String> log() {
+	public Function<DefaultCloudEventImpl<String>, String> log() {
 		return cloudEvent -> {
-			String result = cloudEvent.getData().get() instanceof byte[] ?
-				new String((byte[]) cloudEvent.getData().get()) :
-				cloudEvent.getData().get().toString();
+			String result =
+				new String (Base64.getDecoder().decode(cloudEvent.getData().get()));
 
 			System.out.println("Received: " + result);
 			return result;
