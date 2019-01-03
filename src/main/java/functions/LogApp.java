@@ -20,17 +20,30 @@ import java.util.function.Function;
 
 import io.cloudevents.impl.DefaultCloudEventImpl;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
 /**
  * @author David Turanski
  **/
-public class LogFunction implements Function<DefaultCloudEventImpl, String> {
+@SpringBootApplication
+public class LogApp {
 
-	@Override
-	public String apply(DefaultCloudEventImpl cloudEvent) {
-		String result =
-			new String((byte[]) cloudEvent.getData().get());
+	@Bean
+	public Function<DefaultCloudEventImpl, String> log() {
+		return cloudEvent -> {
+			String result = cloudEvent.getData().get() instanceof byte[] ?
+				new String((byte[]) cloudEvent.getData().get()) :
+				cloudEvent.getData().get().toString();
 
-		System.out.println("Received: " + result);
-		return result;
+			System.out.println("Received: " + result);
+			return result;
+		};
 	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(LogApp.class, args);
+	}
+
 }
