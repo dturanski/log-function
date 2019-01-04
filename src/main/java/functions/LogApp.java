@@ -16,7 +16,6 @@
 
 package functions;
 
-import java.util.Base64;
 import java.util.function.Function;
 
 import io.cloudevents.impl.DefaultCloudEventImpl;
@@ -34,10 +33,8 @@ public class LogApp {
 	@Bean
 	public Function<DefaultCloudEventImpl<String>, String> log() {
 		return cloudEvent -> {
-			String result =
-				new String (Base64.getDecoder().decode(cloudEvent.getData().get()));
-
-			System.out.println("Received: " + result);
+			String result = cloudEvent.getData().get();
+			System.out.println("Received: " + cloudEvent.getData().get());
 			return result;
 		};
 	}
